@@ -1,0 +1,17 @@
+{
+    "spam_protection": {
+        "enabled": false,
+        "limit": 5,
+        "whitelist_roles": [],
+        "whitelist_users": []
+    },
+    "join_raid": {
+        "enabled": true
+    },
+    "backup": {
+        "categories": 0,
+        "channels": 0,
+        "roles": 0,
+        "last_backup": "None"
+    }
+}

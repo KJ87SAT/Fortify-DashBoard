@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Fortify | Servers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background: #0f172a;
+            color: #e5e7eb;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 240px;
+            background: #111827;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        .sidebar a {
+            color: #9ca3af;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: 0.2s;
+        }
+
+        .sidebar a:hover {
+            color: white;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .header {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(31, 41, 55, 0.7);
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            transition: 0.25s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #6366f1;
+        }
+
+        .icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .name {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .btn-manage {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+        }
+
+        .btn-manage:hover {
+            opacity: 0.85;
+        }
+
+        .empty-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #374151;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 15px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>🛡 Fortify</h2>
+    <a href="/servers">Servers</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="main">
+    <div class="header">Your Servers</div>
+
+    <div class="grid">
+        {% for g in guilds %}
+        <div class="card">
+
+            {% if g.icon %}
+                <img class="icon"
+                     src="https://cdn.discordapp.com/icons/{{ g.id }}/{{ g.icon }}.png"
+                     alt="icon">
+            {% else %}
+                <div class="empty-icon">
+                    {{ g.name[0] }}
+                </div>
+            {% endif %}
+
+            <div class="name">{{ g.name }}</div>
+
+            <a class="btn btn-manage" href="/dashboard/{{ g.id }}">
+                Manage
+            </a>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
